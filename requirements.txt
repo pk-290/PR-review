@@ -1,0 +1,31 @@
+# Core dependencies
+fastapi==0.104.1
+uvicorn==0.24.0
+celery==5.3.6
+redis==5.0.1
+python-dotenv==1.0.0
+
+# GitHub Integration
+PyGithub==2.1.1
+
+# Code Analysis
+flake8==6.1.0
+bandit==1.7.7
+
+# AI Integration
+pydantic>=2.7.4,<3.0.0
+google-generativeai>=0.8.0,<0.9.0
+langchain-google-genai==2.0.6
+langgraph
+langchain
+langchain_community
+langchain_core
+
+# API Dependencies
+python-multipart==0.0.6
+httpx==0.25.2
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1 
