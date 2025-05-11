@@ -13,8 +13,8 @@ from app.llm_garden import execute_chain
 logger = logging.getLogger(__name__)
 
 # Environment variables with defaults
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_BACKEND_URL = os.environ.get('CELERY_BACKEND_URL', 'redis://localhost:6379/0')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
+CELERY_BACKEND_URL = os.environ.get('CELERY_BACKEND_URL','redis://redis:6379/0')
 
 # Initialize Celery
 cel = Celery(__name__, broker=CELERY_BROKER_URL, backend=CELERY_BACKEND_URL)

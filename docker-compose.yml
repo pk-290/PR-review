@@ -1,0 +1,42 @@
+# docker-compose.yml
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+    env_file:
+      - .env  # Add environment variables from the .env file
+    environment:
+      # You can add or override environment variables here as well
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - redis
+
+
+  worker:
+    build: .
+    container_name: celery_worker
+    # no --uid flag here!
+    command: celery -A app.tasks worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - ./app:/app/app
+    env_file:
+      - .env  # Add environment variables from the .env file
+    environment:
+      # You can add or override environment variables here as well
+      PYTHONUNBUFFERED: 1
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+

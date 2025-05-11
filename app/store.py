@@ -1,14 +1,10 @@
 import os
 import redis
 import json
-from wrapper import log_exceptions
+
 
 # Get Redis URL from environment variable with a default
-REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
-
-# Raise an error if REDIS_URL is not set or is empty
-if not REDIS_URL:
-    raise ValueError("REDIS_URL environment variable is required but not set")
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis:6379/0')
 
 # Create Redis connection
 r = redis.Redis.from_url(REDIS_URL)
@@ -25,7 +21,7 @@ def init_task(task_id: str, repo_url, pr_number):
 def set_task_status(task_id: str, status: str):
     r.hset(f"task:{task_id}:meta", "status", status)
 
-@log_exceptions
+
 def get_task_status(task_id: str):
     print(task_id)
     meta = r.hgetall(f"task:{task_id}:meta")
