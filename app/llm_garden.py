@@ -3,7 +3,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain_core.rate_limiters import InMemoryRateLimiter
 from langchain_google_genai.chat_models import ChatGoogleGenerativeAI
-from logging_wrapper import log_async_exceptions,log_exceptions
+from app.logging_wrapper import log_async_exceptions,log_exceptions
 
 load_dotenv()
 

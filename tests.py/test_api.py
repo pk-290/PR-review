@@ -10,15 +10,15 @@ client = TestClient(app)
 @pytest.fixture
 def fake_pr_data():
     return {
-        "repo_url": "https://github.com/example/repo",
-        "pr_number": 42,
+        "repo_url": "https://github.com/potpie-ai/potpie",
+        "pr_number": 398,
         "github_token": "ghp_dummyToken"
     }
 
 def test_post_analyze_pr(fake_pr_data):
     # Patch Celery task to return fake UUID immediately
     fake_task_id = str(uuid.uuid4())
-    with patch("app.routes.analyze_pr.delay") as mock_task:
+    with patch("app.main.analyze_pr.delay") as mock_task:
         mock_task.return_value.id = fake_task_id
         response = client.post("/analyze-pr", json=fake_pr_data)
         assert response.status_code == 200

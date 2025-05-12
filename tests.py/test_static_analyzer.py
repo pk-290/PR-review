@@ -3,7 +3,7 @@ import ast
 import pytest
 
 # Assume run_static_analyzer is defined in static_analyzer.py
-from app.static_analyzer import run_static_analyzer
+from app.static_analyzer_tools import run_static_analyzer
 
 class DummyBlock:
     def __init__(self, name, complexity):

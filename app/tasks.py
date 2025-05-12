@@ -2,9 +2,9 @@ import os
 import time
 import logging
 from celery import Celery
-from app.store import *
+from app.redis_store import *
 import asyncio
-from app.pr_intelligence import review_pr_agents
+from app.process_pr_review import review_pr_agents
 
 # Set up logging
 logger = logging.getLogger(__name__)

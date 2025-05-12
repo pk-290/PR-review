@@ -4,7 +4,7 @@ import os
 import subprocess
 import ast
 from radon.complexity import cc_visit
-from logging_wrapper import log_async_exceptions,log_exceptions
+from app.logging_wrapper import log_async_exceptions,log_exceptions
 import textwrap
 
 @log_exceptions

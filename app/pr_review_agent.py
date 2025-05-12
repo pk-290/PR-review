@@ -2,8 +2,8 @@ from app.llm_garden import aexecute_chain
 from typing import List ,Optional,Literal
 from langchain_core.output_parsers import JsonOutputParser
 from pydantic import BaseModel, Field
-from app.static_analyzer import run_static_analyzer 
-from logging_wrapper import log_async_exceptions,log_exceptions
+from app.static_analyzer_tools import run_static_analyzer 
+from app.logging_wrapper import log_async_exceptions,log_exceptions
 
 
 class issue_model(BaseModel):

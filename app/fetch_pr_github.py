@@ -6,7 +6,7 @@ import json
 import aiohttp
 import asyncio
 import base64
-from logging_wrapper import log_async_exceptions,log_exceptions
+from app.logging_wrapper import log_async_exceptions,log_exceptions
 
 # GitHub API base URL
 API_URL = "https://api.github.com"
@@ -226,20 +226,5 @@ async def run_pr_fetch(repo_url, pr_number, token=None):
             file_texts.append(formatted_file_content)
     return pr_text , file_texts
 
-# async def main():
-#     # Example usage:
-#     url = "https://github.com/potpie-ai/potpie"
-#     pr_number = 398
 
-#     pr_details, files_contents = await run_pr_fetch(url, pr_number)
-
-#     print(pr_details)
-#     print("=" * 50)
-#     print(len(files_contents))
-
-#     for text in files_contents:
-#         print(text)
-
-# if __name__ == '__main__':
-#     asyncio.run(main())
 

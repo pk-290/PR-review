@@ -1,7 +1,7 @@
 import asyncio
-from app.fetch_github import run_pr_fetch
+from app.fetch_pr_github import run_pr_fetch
 from app.pr_review_agent import review_hunk
-from logging_wrapper import log_async_exceptions,log_exceptions
+from app.logging_wrapper import log_async_exceptions,log_exceptions
 import logging
 
 logger = logging.getLogger(__name__)

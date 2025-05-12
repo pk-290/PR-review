@@ -3,8 +3,8 @@ import os
 from fastapi import FastAPI, HTTPException
 from app.models import AnalyzePRRequest, StatusResponse, ResultsResponse
 from app.tasks import analyze_pr
-from app.store import get_task_status, get_final_result
-from logging_wrapper import log_async_exceptions,log_exceptions
+from app.redis_store import get_task_status, get_final_result
+from app.logging_wrapper import log_async_exceptions,log_exceptions
 
 app = FastAPI()
 
