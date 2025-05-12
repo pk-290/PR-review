@@ -27,19 +27,6 @@ def get_task_status(task_id: str):
     meta = r.hgetall(f"task:{task_id}:meta")
     return {k.decode(): v.decode() for k,v in meta.items()} if meta else None
 
-def add_hunk(task_id: str, hunk_id: str):
-    r.rpush(f"task:{task_id}:hunks", hunk_id)
-
-def set_hunk_result(task_id: str, hunk_id: str, result: dict):
-    r.set(f"task:{task_id}:hunk:{hunk_id}", json.dumps(result))
-
-def get_all_hunk_results(task_id: str):
-    hunks = [h.decode() for h in r.lrange(f"task:{task_id}:hunks", 0, -1)]
-    results = []
-    for h in hunks:
-        data = json.loads(r.get(f"task:{task_id}:hunk:{h}"))
-        results.append(data)
-    return results
 
 def set_final_result(task_id: str, result: dict):
     r.set(f"task:{task_id}:result", json.dumps(result))

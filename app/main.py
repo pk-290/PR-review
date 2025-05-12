@@ -20,13 +20,14 @@ def status(task_id: str):
     if not meta: raise HTTPException(404, "Not found")
     return {"task_id": task_id, "status": meta["status"]}
 
-@app.get("/results/{task_id}", response_model=ResultsResponse)
+@app.get("/results/{task_id}")
 def results(task_id: str):
     status = get_task_status(task_id)
     if not status or status["status"] != "completed":
         raise HTTPException(404, "Results not ready")
     final_review = get_final_result(task_id)
     res = {"task_id":task_id , "status": "completed" , "results" : final_review}
+    # print(res)
     return res
 
 
