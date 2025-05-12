@@ -25,9 +25,7 @@ cel.conf.update(
     task_reject_on_worker_lost=True,
     task_serializer='json',
     accept_content=['json'],
-    result_serializer='json',
-    enable_utc=True,
-)
+    result_serializer='json')
 
 # Windows-specific configuration
 if os.name == 'nt':  # Windows

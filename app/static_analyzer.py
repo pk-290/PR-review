@@ -5,13 +5,14 @@ import subprocess
 import ast
 from radon.complexity import cc_visit
 from logging_wrapper import log_async_exceptions,log_exceptions
-
+import textwrap
 
 @log_exceptions
 def run_static_analyzer(code_hunk: str) -> str:
         """
         Analyze the provided Python code hunk and report detected code smells.
         """
+        code_hunk = textwrap.dedent(code_hunk)
         results = []
 
         # 1. Check cyclomatic complexity using radon
