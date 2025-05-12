@@ -4,14 +4,21 @@ An intelligent Pull Request review system that uses AI to analyze and review cod
 
 ## Features
 
-- Ratelimit on gemini call
-- Automated PR analysis using AI
-- Code quality checks using flake8 and bandit
+- Ratelimiter for gemini call
+- Automated PR analysis using Gemini LLM
+- Tools used :Radon library to compute cyclomatic complexity,
+             Python's ast module to detect deeply nested control flows, 
+             custom logic to check for long functions,
+             Pylint for style and naming
 - Integration with GitHub for PR management
 - Asynchronous task processing with Celery
 - RESTful API built with FastAPI
 - Docker containerization for easy deployment
+- Logging and exceptional handling
 
+## Upcoming Updates
+
+ If time allows would work on integrating this tool into an agentic workflow using LangGraph, enabling agents to reason, plan, and invoke these analysis tools autonomously. This will allow for multi-step, intelligent code review and refactoring suggestions powered by LLMs and custom logic.
 
 ## Prerequisites
 
@@ -74,6 +81,10 @@ uvicorn app.main:app --reload
 ```
 
 3. In a separate terminal, start the Celery worker:
+For windows use 
+```bash
+celery -A app.tasks worker -l info --pool=threads --concurrency=4
+````
 ```bash
 celery -A app.tasks worker --loglevel=info
 ```
