@@ -6,13 +6,14 @@ import json
 import aiohttp
 import asyncio
 import base64
-
+from logging_wrapper import log_async_exceptions,log_exceptions
 
 # GitHub API base URL
 API_URL = "https://api.github.com"
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
+@log_exceptions
 def parse_repo_url(url):
     """Parses GitHub URL to extract owner and repo name."""
     match = re.match(r"https?://github\.com/([^/]+)/([^/]+?)(?:\.git)?$", url)
@@ -32,7 +33,6 @@ def get_github_headers(token):
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github.v3+json",
     }
-
 
 def format_pr_details_to_text(pr_data):
     """Formats PR JSON data into a human-readable text string."""
@@ -91,7 +91,7 @@ def format_pr_details_to_text(pr_data):
         details.append("(No description provided)")
     return "\n".join(details)
 
-    
+@log_async_exceptions   
 async def fetch_pr_details(owner, repo, pr_number, token):
     """Asynchronously fetches PR details and returns formatted text and raw JSON."""
 
@@ -106,6 +106,7 @@ async def fetch_pr_details(owner, repo, pr_number, token):
             data = await resp.json()
             return format_pr_details_to_text(data), data
 
+@log_async_exceptions
 async def fetch_pr_files(owner: str, repo: str, pr_number: int, token: str) -> list:
     """
     Fetch the list of files in a PR, paging concurrently.
@@ -148,7 +149,7 @@ async def fetch_pr_files(owner: str, repo: str, pr_number: int, token: str) -> l
         # Combine first page + the rest
         return first_page + results
 
-
+@log_async_exceptions
 async def fetch_file_content(owner: str, repo: str, file_path: str, ref: str, token: str) -> str:
     """Asynchronously fetches the content of a specific file at a given ref."""
     url = f"{API_URL}/repos/{owner}/{repo}/contents/{file_path}?ref={ref}"
@@ -200,7 +201,7 @@ def format_file_content(content,filename):
     return "\n".join(buf)
 
 
-
+@log_async_exceptions
 async def run_pr_fetch(repo_url, pr_number, token=None):
     """
     Fetch PR details and file contents. 
